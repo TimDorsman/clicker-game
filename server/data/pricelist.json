@@ -1,0 +1,28 @@
+{
+    "priceList": [
+        {
+            "type": "human",
+            "name": "farmer",
+            "income": 2,
+            "price": 50
+        },
+        {
+            "type": "human",
+            "name": "miner",
+            "income": 12,
+            "price": 250
+        },
+        {
+            "type": "building",
+            "name": "factory",
+            "income": 25,
+            "price": 500
+        },
+        {
+            "type": "building",
+            "name": "freelancer",
+            "income": 30,
+            "price": 600
+        }
+    ]
+}
