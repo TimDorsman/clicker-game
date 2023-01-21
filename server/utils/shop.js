@@ -1,10 +1,12 @@
 const { priceList } = require('../data/pricelist.json');
-const { generate } = require('./assetsmanager');
+const { build } = require('./assetsfactory');
+const Inventory = require('./inventory');
+const Wallet = require('./wallet');
 
 class Shop {
-	constructor(inventory, wallet) {
-		this.inventory = inventory;
-		this.wallet = wallet;
+	constructor() {
+		this.inventory = new Inventory();
+		this.wallet = new Wallet();
 		this.priceList = priceList;
 	}
 
@@ -25,7 +27,7 @@ class Shop {
 			}
 		}
 
-		const assetClass = generate(selectedAsset);
+		const assetClass = build(selectedAsset);
 
 		this.wallet.takeCoins(selectedAsset.price);
 		this.inventory.addAsset(assetClass);

@@ -10,7 +10,6 @@ const getWalletTotal = (app) => app.get('/wallet/total', (req, res) => {
     }
 
     const walletTotal = getWalletTotalFunc();
-    console.log("walletTotal", walletTotal);
     res.status(200).send({
         result: true,
         data: {

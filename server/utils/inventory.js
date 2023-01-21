@@ -13,8 +13,12 @@ class Inventory {
         return this.assets;
     }
 
-    getTotalOfAsset(type) {
+    getAllAssetByType(type) {
         return this.assets.filter(asset => asset.type === type);
+    }
+
+    getAllAssetsByName(name) {
+        return this.assets.filter(asset => asset.name === name);
     }
 
     addAsset(asset) {

@@ -4,8 +4,8 @@ const Factory = require('./assets/factory');
 const Corporate = require('./assets/corporate');
 
 
-class AssetsManager {
-    static generate(asset) {
+class AssetsFactory {
+    static build(asset) {
         const { type, name, income } = asset;
 
         switch(name) {
@@ -22,4 +22,4 @@ class AssetsManager {
     }
 }
 
-module.exports = AssetsManager;
+module.exports = AssetsFactory;

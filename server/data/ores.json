@@ -1,0 +1,17 @@
+[
+    {
+        "type": "gold",
+        "chance": 0.5,
+        "price": 200
+    },
+    {
+        "type": "diamonds",
+        "chance": 0.2,
+        "price": 500
+    },
+    {
+        "type": "emerald",
+        "chance": 0.1,
+        "price": 500
+    }
+]

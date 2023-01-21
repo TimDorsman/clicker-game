@@ -1,34 +1,31 @@
+const { MINER } = require("../../constants/assets");
 const Inventory = require("./inventory");
-const Shop = require("./shop");
+const Mine = require("./structures/mine");
 const Wallet = require("./wallet");
+
+const inventory = new Inventory();
+const wallet = new Wallet();
+const mine = new Mine();
 
 class GameController {
     constructor() {
-        this.inventory = new Inventory();
-        this.wallet = new Wallet();
-        this.shop = new Shop(this.inventory, this.wallet);
+        if (GameController.instance) {
+            return GameController.instance;
+        }
+
+        GameController.instance = this;
+
         this.startGeneratingMoney();
-    }
-
-    getInventory() {
-        return this.inventory;
-    }
-
-    getWallet() {
-        return this.wallet;
-    }
-
-    getShop() {
-        return this.shop;
+        mine.startMining();
     }
 
     startGeneratingMoney() {
         setInterval(() => {
-            const assets = this.inventory.getAssets();
+            const assets = inventory.getAssets();
             const totalGeneratedCoins = assets.reduce((currentValue, asset) => currentValue + asset.generateIncome(), 0);
 
-            this.wallet.addCoins(totalGeneratedCoins);
-        }, 1000)
+            wallet.addCoins(totalGeneratedCoins);
+        }, 1000);
     }
 };
 
