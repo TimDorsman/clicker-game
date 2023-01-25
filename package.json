@@ -13,8 +13,19 @@
 	"license": "ISC",
 	"dependencies": {
 		"dotenv": "^16.0.3",
+		"ejs": "^3.1.8",
 		"express": "^4.18.2",
+		"express-ws": "^5.0.2",
+		"faker": "^6.6.6",
 		"node-sass": "^8.0.0",
-		"nodemon": "^2.0.20"
+		"nodemon": "^2.0.20",
+		"socket.io": "^4.5.4",
+		"socket.io-client": "^4.5.4",
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"babel-preset-es2015": "^6.24.1",
+		"babelify": "^10.0.0",
+		"esmify": "^2.1.1"
 	}
 }

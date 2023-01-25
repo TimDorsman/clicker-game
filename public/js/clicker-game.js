@@ -43,7 +43,6 @@ async function getWalletTotal() {
 
 async function updateCoinDisplay() {
 	const totalCoins = await getWalletTotal();
-	console.log("totalCoins", totalCoins);
 	coinTotal.innerText = totalCoins;
 }
 

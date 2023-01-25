@@ -10,7 +10,7 @@
             "type": "human",
             "name": "miner",
             "income": 12,
-            "price": 5
+            "price": 250
         },
         {
             "type": "building",

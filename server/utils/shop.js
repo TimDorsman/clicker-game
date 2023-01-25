@@ -23,12 +23,11 @@ class Shop {
 		if (this.wallet.getTotal() < selectedAsset.price) {
 			return {
 				result: false,
-				error: 'You don\'t have enough coins to purchase this asset'
+				error: 'You don\'t have enough coins to purchase this asset' + selectedAsset.price
 			}
 		}
 
 		const assetClass = build(selectedAsset);
-
 		this.wallet.takeCoins(selectedAsset.price);
 		this.inventory.addAsset(assetClass);
 

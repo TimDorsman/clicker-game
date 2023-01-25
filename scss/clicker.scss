@@ -103,3 +103,19 @@ body {
     margin: 10px auto;
     user-select: none;
 }
+
+.inventory {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 24px;
+        &-item {
+        }
+    }
+}

@@ -8,25 +8,30 @@ const wallet = new Wallet();
 const mine = new Mine();
 
 class GameController {
-    constructor() {
-        if (GameController.instance) {
-            return GameController.instance;
-        }
+	constructor() {
+		if (GameController.instance) {
+			return GameController.instance;
+		}
 
-        GameController.instance = this;
+		GameController.instance = this;
 
-        this.startGeneratingMoney();
-        mine.startMining();
-    }
+		this.startGeneratingMoney();
+		mine.startMining();
+	}
 
-    startGeneratingMoney() {
-        setInterval(() => {
-            const assets = inventory.getAssets();
-            const totalGeneratedCoins = assets.reduce((currentValue, asset) => currentValue + asset.generateIncome(), 0);
+	startGeneratingMoney() {
+		setInterval(() => {
+			const assets = inventory.getAssets();
+			let totalGeneratedCoins = 0;
 
-            wallet.addCoins(totalGeneratedCoins);
-        }, 1000);
-    }
+			for(const value of Object.values(assets)) {
+				if(!value.length) continue;
+				totalGeneratedCoins += value.reduce((currentValue, asset) => currentValue + asset.generateIncome(), 0);
+			}
+
+			wallet.addCoins(totalGeneratedCoins);
+		}, 1000);
+	}
 };
 
 module.exports = GameController;
