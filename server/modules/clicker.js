@@ -3,11 +3,13 @@ const Wallet = require('../utils/wallet');
 const Inventory = require('../utils/inventory');
 const Shop = require('../utils/shop');
 const GameController = require('../utils/gamecontroller');
+const Merchant = require('../utils/merchant');
 
-const gameController = new GameController();
+new GameController();
 const wallet = new Wallet();
 const inventory = new Inventory();
 const shop = new Shop();
+const merchant = new Merchant();
 
 // Wallet
 const getWalletTotalFunc = function () {
@@ -27,9 +29,14 @@ const buyAssetFunc = function (name) {
     return shop.buyAsset(name)
 }
 
+const sellProductFunc = function(type, product) {
+    return merchant.sellProduct(type, product);
+}
+
 module.exports = {
     getWalletTotalFunc,
     addCoinsToWalletFunc,
     getAssetsFunc,
-    buyAssetFunc
+    buyAssetFunc,
+    sellProductFunc
 }

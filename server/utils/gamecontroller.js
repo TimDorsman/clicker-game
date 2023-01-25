@@ -8,13 +8,15 @@ const wallet = new Wallet();
 const mine = new Mine();
 
 class GameController {
+	GENERATE_MONEY_INTERVAL;
+
 	constructor() {
 		if (GameController.instance) {
 			return GameController.instance;
 		}
 
 		GameController.instance = this;
-
+		this.GENERATE_MONEY_INTERVAL = 1000;
 		this.startGeneratingMoney();
 		mine.startMining();
 	}
@@ -30,7 +32,7 @@ class GameController {
 			}
 
 			wallet.addCoins(totalGeneratedCoins);
-		}, 1000);
+		}, this.GENERATE_MONEY_INTERVAL);
 	}
 };
 

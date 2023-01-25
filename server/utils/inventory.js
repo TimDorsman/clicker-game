@@ -1,5 +1,5 @@
-const { MERGED, SPLIT } = require("../../constants/inventory");
-const { wsio } = require("../../websocket-server");
+const { MERGED, FLAT, ASSETS } = require("../../constants/inventory");
+const { ORES } = require("../../constants/ores");
 
 class Inventory {
     constructor() {
@@ -13,50 +13,50 @@ class Inventory {
     };
 
     getAssets() {
-        return this.formatByItem('assets', SPLIT)
+        return this.formatByItem(ASSETS, FLAT)
     }
 
     getOres() {
-        return this.formatByItem('ores', MERGED)
+        return this.formatByItem(ORES, MERGED)
     }
 
-    getAssetsByName(name) {
-        return this.assets.get(name) ?? [];
-    }
-
-    addAsset(asset) {
-        if(!this.assets.has(asset.name)) {
-            console.log("Setting new set for", asset.name);
-            this.assets.set(asset.name, [asset]);
+    addItem(type, item) {
+        if(!this[type].has(item.name)) {
+            this[type].set(item.name, [item]);
             return;
         }
 
-        const assets = this.assets.get(asset.name);
-        assets.push(asset);
-        this.assets.set(asset.name, assets);
+        const assets = this[type].get(item.name);
+        assets.push(item);
+        this[type].set(item.name, assets);
     }
 
-    getOreByName(name) {
-        return this.ores.get(name);
-    }
-
-    addOre(ore) {
-        if(!this.ores.has(ore.name)) {
-            this.ores.set(ore.name, [ore]);
-            return;
+    removeItems(type, name, amount = 'all') {
+        // Remove all items from a category
+        if(amount === 'all') {
+            const removedItems = this[type].get(name);
+            this[type].set(name, [])
+            return removedItems
         }
 
-        const ores = this.ores.get(ore.name);
-        ores.push(ore);
-        this.ores.set(ore.name, ores);
+        const categorizedItems = this[type].get(name);
+        const removedItems = categorizedItems.splice(0, amount);
+
+        this[type].set(categorizedItems);
+
+        return removedItems;
     }
 
-    formatByItem(item, type = MERGED) {
+    getItemByName(type, name) {
+        return this[type].get(name);
+    }
 
-        if(type === MERGED) {
+    formatByItem(item, sorting = MERGED) {
+        if(sorting === MERGED) {
             const tempObj = {};
+            // [{ores}, {ores}]
             for(const [key, value] of this[item].entries()) {
-                if(!tempObj[key]) {
+                if(!tempObj[key] && value.length) {
                     const totalSum = value.reduce((currentvalue, prop) => currentvalue + prop.price, 0);
                     value[0].totalPrice = totalSum;
                     value[0].amount = value.length;
@@ -67,7 +67,7 @@ class Inventory {
 
             return tempObj
         }
-        else if(type === SPLIT) {
+        else if(sorting === FLAT) {
             let tempArr = [];
 
             for(const value of this[item].values()) {
@@ -77,7 +77,7 @@ class Inventory {
             return tempArr;
         }
 
-        console.warn("[INVENTORY] - Type not recognized: ", type);
+        console.warn("[INVENTORY] - sorting not recognized: ", sorting);
     }
 }
 

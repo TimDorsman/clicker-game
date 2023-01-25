@@ -11,10 +11,3 @@ socket.on('server-reload', (data) => {
 })
 
 require('./ores');
-
-socket.on('connect', () => {
-    console.log("Socket client", socket.id);
-    socket.emit('send-ore', 'Gold');
-})
-
-

@@ -1,23 +1,28 @@
-const { getSocketClients, wsio } = require('../../../websocket-server');
-const { MINER } = require('../../../constants/assets');
 const lodash = require('lodash');
-const ores = require('../../data/ores.json');
-const Inventory = require('../inventory');
+const { wsio } = require('../../../websocket-server');
+const { MINER } = require('../../../constants/assets');
+const { oreList }  = require('../../data/ores.json');
+const { ASSETS } = require('../../../constants/inventory');
 
+const Inventory = require('../inventory');
+const { ORES } = require('../../../constants/ores');
 const inventory = new Inventory();
 
 class Mine {
+    #MINING_INTERVAL = 100;
+
     constructor() {
-        this.ores = ores;
+        this.oreList = oreList;
         this.MINIMUM_MINERS_PER_LEVEL = 20;
     }
 
     increaseChanceOfOres() {
-        const allMiners = inventory.getAssetsByName(MINER);
+        const allMiners = inventory.getItemByName(ASSETS, MINER);
+        console.log("allMiners", allMiners);
         const totalMiners = allMiners.size;
         const increaseChancePercentage = totalMiners % this.MINIMUM_MINERS_PER_LEVEL === 0 ? 1 : 0;
 
-        this.ores = this.ores.map(ore => {
+        this.oreList = this.oreList.map(ore => {
             ore.chance += increaseChancePercentage;
             return ore;
         })
@@ -25,8 +30,7 @@ class Mine {
 
     startMining() {
         setInterval(() => {
-            // console.log("Mining...")
-            const foundOres = this.ores.filter(ore => {
+            const foundOres = this.oreList.filter(ore => {
                 const propability = lodash.random(1, 1000);
                 const foundOre = lodash.inRange(propability, 0, (ore.chance * 10) + 1);
                 return foundOre;
@@ -38,7 +42,7 @@ class Mine {
 
             if (foundOres.length === 1) {
                 console.log("Your miner(s) have found a new ore:", foundOres[0].name)
-                inventory.addOre(foundOres[0]);
+                inventory.addItem(ORES, foundOres[0]);
             }
             else {
                 console.log("Your miner(s) have found some new ores:", foundOres.map(ore => ore.name).join(', '));
@@ -46,11 +50,11 @@ class Mine {
                 const selectedOre = foundOres[rndNum];
 
                 console.log("The winning ore is " + selectedOre.name);
-                inventory.addOre(selectedOre);
+                inventory.addItem(ORES, selectedOre);
             }
 
-            wsio.emit('receive-ore', inventory.getOres());
-        }, 100);
+            wsio.emit('update-ores', true);
+        }, this.#MINING_INTERVAL);
     }
 }
 

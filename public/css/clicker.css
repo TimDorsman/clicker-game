@@ -1,5 +1,5 @@
 html {
-  height: 100vh; }
+  min-height: 100vh; }
 
 body {
   background: linear-gradient(#a85656, #fff);
@@ -28,7 +28,7 @@ body {
   justify-content: center; }
   .buttons-container:first-child {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: 1fr 1fr 1fr; }
 
 .button {
@@ -87,3 +87,14 @@ body {
     flex-direction: column;
     gap: 5px;
     font-size: 24px; }
+  .inventory-sell {
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+    font-size: 16px;
+    border: 1px solid #FFF;
+    background: linear-gradient(#ff0000, #b60404);
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer; }
+    .inventory-sell:active {
+      background: linear-gradient(#b60404, #ff0000); }

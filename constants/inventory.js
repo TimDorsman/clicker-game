@@ -1,7 +1,9 @@
 const MERGED = 'MERGED';
-const SPLIT = 'SPLIT';
+const FLAT = 'flat';
+const ASSETS = 'assets';
 
 module.exports = {
     MERGED,
-    SPLIT
+    FLAT,
+    ASSETS
 }

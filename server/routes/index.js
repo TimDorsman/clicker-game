@@ -6,6 +6,7 @@ const { getWalletTotal } = require('../api/wallet/get');
 
 const { getAssets } = require('../api/game/get');
 const { buyAsset } = require('../api/game/post');
+const { sellProduct } = require('../api/merchant/post');
 
 module.exports = function(app) {
 	// Add user
@@ -21,5 +22,8 @@ module.exports = function(app) {
 	// Game
 	buyAsset(app);
 	getAssets(app);
+
+	// Merchandise
+	sellProduct(app)
     //other routes..
 }

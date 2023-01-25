@@ -1,17 +1,19 @@
-[
-    {
-        "name": "gold",
-        "chance": 0.5,
-        "price": 200
-    },
-    {
-        "name": "diamonds",
-        "chance": 0.2,
-        "price": 500
-    },
-    {
-        "name": "emerald",
-        "chance": 0.1,
-        "price": 500
-    }
-]
+{
+    "oreList": [
+        {
+            "name": "gold",
+            "chance": 1,
+            "price": 200
+        },
+        {
+            "name": "diamonds",
+            "chance": 0.5,
+            "price": 500
+        },
+        {
+            "name": "emerald",
+            "chance": 0.1,
+            "price": 500
+        }
+    ]
+}
