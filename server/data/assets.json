@@ -1,5 +1,5 @@
 {
-    "priceList": [
+    "assetsList": [
         {
             "type": "human",
             "name": "farmer",
@@ -10,7 +10,7 @@
             "type": "human",
             "name": "miner",
             "income": 12,
-            "price": 250
+            "price": 5
         },
         {
             "type": "building",
@@ -20,7 +20,7 @@
         },
         {
             "type": "building",
-            "name": "cinema",
+            "name": "corporate",
             "income": 30,
             "price": 600
         }

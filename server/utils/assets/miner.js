@@ -8,7 +8,7 @@ const mine = new Mine();
 class Miner extends Asset {
     constructor(type, name, income) {
         super(type, name, income);
-        mine.increaseChanceOfOres();
+        // mine.increaseChanceOfOres();
     }
 
     mine() {

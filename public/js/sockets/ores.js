@@ -18,7 +18,6 @@ function addListeners() {
         })
         .then(res => res.json())
         .then(response => {
-            console.log('Sell item', response);
         })
         
     }))
@@ -26,7 +25,7 @@ function addListeners() {
 
 addListeners();
 
-socket.on('update-ores', async (hasOres) => {
+socket.on('update-inventory', async (hasOres) => {
     // Receive partial
     if(!hasOres) {
         inventoryList.innerHTML = '';

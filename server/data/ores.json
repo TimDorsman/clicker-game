@@ -1,17 +1,20 @@
 {
     "oreList": [
         {
+            "type": "ore",
             "name": "gold",
             "chance": 1,
             "price": 200
         },
         {
+            "type": "ore",
             "name": "diamonds",
             "chance": 0.5,
             "price": 500
         },
         {
-            "name": "emerald",
+            "type": "ore",
+            "name": "emeralds",
             "chance": 0.1,
             "price": 500
         }

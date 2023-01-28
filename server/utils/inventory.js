@@ -54,10 +54,9 @@ class Inventory {
     formatByItem(item, sorting = MERGED) {
         if(sorting === MERGED) {
             const tempObj = {};
-            // [{ores}, {ores}]
             for(const [key, value] of this[item].entries()) {
                 if(!tempObj[key] && value.length) {
-                    const totalSum = value.reduce((currentvalue, prop) => currentvalue + prop.price, 0);
+                    const totalSum = value.reduce((currentValue, prop) => currentValue + prop.price, 0);
                     value[0].totalPrice = totalSum;
                     value[0].amount = value.length;
                     tempObj[key] = value[0];

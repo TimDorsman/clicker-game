@@ -1,11 +1,11 @@
 const FARMER = 'farmer';
 const MINER = 'miner';
 const FACTORY = 'factory';
-const CINEMA = 'cinema';
+const CORPORATE = 'corporate';
 
 module.exports = {
     FARMER,
     MINER,
     FACTORY,
-    CINEMA
+    CORPORATE
 }

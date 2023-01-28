@@ -10,11 +10,12 @@
 
 <body>
 	<main class="main">
+		<%- include('./partials/level-tracker'); %>
 		<%- include('./partials/inventory'); %>
 		<div class="main-container">
 			<div class="buttons-wrapper">
 				<div class="buttons-container button-container--secondary">
-					<% priceList.forEach(function({name, price}) { %>
+					<% assetsList.forEach(function({name, price}) { %>
 						<div>
 							<button id="buyFarmer" data-name="<%= name %>" data-event="buyAsset" class="button secondary">Buy <%= name %> (<span>0</span>)</button>
 							<p class="asset-price"><%= price %></p>

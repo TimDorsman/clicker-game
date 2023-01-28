@@ -1,11 +1,11 @@
 const GOLD = 'gold';
 const DIAMONDS = 'diamonds';
-const EMERALD = 'emerald';
+const EMERALDS = 'emeralds';
 const ORES = 'ores';
 
 module.exports = {
     GOLD,
     DIAMONDS,
-    EMERALD,
+    EMERALDS,
     ORES
 }

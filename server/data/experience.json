@@ -1,0 +1,19 @@
+{
+    "experienceList": [
+        {
+            "name": "gold",
+            "minExperience": 20,
+            "maxExperience": 25
+        },
+        {
+            "name": "diamonds",
+            "minExperience": 20,
+            "maxExperience": 25
+        },
+        {
+            "name": "emeralds",
+            "minExperience": 20,
+            "maxExperience": 25
+        }
+    ]
+}

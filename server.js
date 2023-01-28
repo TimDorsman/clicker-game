@@ -2,7 +2,7 @@ const express = require('express');
 const ejs = require('ejs');
 const app = express();
 const server = require('http').createServer(app);
-const { priceList } = require('./server/data/pricelist.json');
+const { assetsList } = require('./server/data/assets.json');
 
 app.use(express.static('public'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
@@ -14,7 +14,10 @@ require('./server/routes')(app);
 const port = process.env.SERVER_PORT || 3000;
 
 const Inventory = require('./server/utils/inventory');
+const LevelTracker = require('./server/utils/user/progress/level-tracker');
+
 const inventory = new Inventory();
+const levelTracker = new LevelTracker();
 
 app.get('/', async (_, res) => {
 	res.render('index.ejs')
@@ -23,8 +26,14 @@ app.get('/', async (_, res) => {
 
 app.get('/clicker', async (_, res) => {
 	res.render('clicker.ejs', {
-		priceList,
+		assetsList,
 		inventory: inventory.getOres(),
+		level: {
+			progress: levelTracker.getProgress(),
+			stage: levelTracker.getStage(),
+			experience: levelTracker.getExperience(),
+			minimumExperience: levelTracker.getMinimumExperience(),
+		}
 	})
 })
 

@@ -1,0 +1,9 @@
+<div class="level-tracker">
+    <div class="level-display">
+        Level <span class="level-stage"><%= level.stage %></span><span class="divider"> | </span>
+        <div class="level-experience">
+            [<span class="level-current-experience"><%= level.experience %></span> / <span class="level-min-experience"><%= level.minimumExperience %></span>]
+        </div>
+    </div>
+    <div class="level-tracker-progress" style="width: <%= level.progress %>%"></div>
+</div>

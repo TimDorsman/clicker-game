@@ -1,7 +1,9 @@
 const { wsio } = require("../../websocket-server");
 const Inventory = require("./inventory");
+const LevelTracker = require("./user/progress/level-tracker");
 const Wallet = require("./wallet");
 
+const levelTracker = new LevelTracker();
 const inventory = new Inventory();
 const wallet = new Wallet();
 
@@ -19,18 +21,22 @@ class Merchant {
             }
         }
 
-        const removedItems = inventory.removeItems(type, product);
-        const profit = removedItems.reduce((currentValue, items) => currentValue + items.price, 0);
+        const soldItems = inventory.removeItems(type, product);
+        const profit = soldItems.reduce((currentValue, items) => currentValue + items.price, 0);
         
         wallet.addCoins(profit);
+
         const hasOres = new Boolean(Object.keys(inventory.getOres()).length);
-        wsio.emit('update-ores', hasOres)
+        levelTracker.addExperience(soldItems);
+        wsio.emit('update-inventory', hasOres);
 
         return {
             result: true,
-            data: `Succesfully sold your ${removedItems.length} ${product} for ${profit} coins`,
+            data: `Succesfully sold your ${soldItems.length} ${product} for ${profit} coins`,
         }
     }
+
+
 };
 
 module.exports = Merchant;

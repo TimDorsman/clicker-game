@@ -1,0 +1,43 @@
+.level-tracker {
+  position: relative;
+  height: 80px;
+  box-sizing: border-box;
+  width: calc(100% - 20px);
+  padding: 0;
+  background: red;
+  margin: 10px auto;
+  border-radius: 20px;
+  overflow: hidden; }
+  .level-tracker-progress {
+    height: 100%;
+    background: yellow;
+    width: 80%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px; }
+    .level-tracker-progress.transition {
+      transition: width 1s ease-out; }
+
+.level-display {
+  color: #FFF;
+  text-shadow: 1px 1px 3px #000;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 25px;
+  margin: 0;
+  font-family: 'Bebas Neue', cursive; }
+  .level-display .divider {
+    color: rgba(0, 0, 0, 0.4);
+    text-shadow: none;
+    font-size: 32px; }
+
+.level-stage {
+  font-size: 48px;
+  color: orange; }
+
+.level-experience {
+  font-size: 24px; }

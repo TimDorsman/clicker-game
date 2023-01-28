@@ -1,4 +1,4 @@
-const { priceList } = require('../data/pricelist.json');
+const { assetsList } = require('../data/assets.json');
 const { oreList } = require('../data/ores.json');
 const { build } = require('./assetsfactory');
 const Inventory = require('./inventory');
@@ -9,12 +9,12 @@ class Shop {
 	constructor() {
 		this.inventory = new Inventory();
 		this.wallet = new Wallet();
-		this.priceList = priceList;
+		this.assetsList = assetsList;
 		this.oreList = oreList;
 	}
 
 	buyAsset(name) {
-		const selectedAsset = this.priceList.find(asset => asset.name === name);
+		const selectedAsset = this.assetsList.find(asset => asset.name === name);
 
 		if (!selectedAsset) {
 			return {
@@ -26,7 +26,7 @@ class Shop {
 		if (this.wallet.getTotal() < selectedAsset.price) {
 			return {
 				result: false,
-				error: 'You don\'t have enough coins to purchase this asset' + selectedAsset.price
+				error: `You don't have enough coins to purchase this asset (need ${selectedAsset.price})`,
 			}
 		}
 

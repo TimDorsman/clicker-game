@@ -12,13 +12,13 @@ class Mine {
     #MINING_INTERVAL = 100;
 
     constructor() {
+        this.name = 'Mine';
         this.oreList = oreList;
         this.MINIMUM_MINERS_PER_LEVEL = 20;
     }
 
     increaseChanceOfOres() {
         const allMiners = inventory.getItemByName(ASSETS, MINER);
-        console.log("allMiners", allMiners);
         const totalMiners = allMiners.size;
         const increaseChancePercentage = totalMiners % this.MINIMUM_MINERS_PER_LEVEL === 0 ? 1 : 0;
 
@@ -41,19 +41,19 @@ class Mine {
             }
 
             if (foundOres.length === 1) {
-                console.log("Your miner(s) have found a new ore:", foundOres[0].name)
+                // console.log("Your miner(s) have found a new ore:", foundOres[0].name)
                 inventory.addItem(ORES, foundOres[0]);
             }
             else {
-                console.log("Your miner(s) have found some new ores:", foundOres.map(ore => ore.name).join(', '));
+                // console.log("Your miner(s) have found some new ores:", foundOres.map(ore => ore.name).join(', '));
                 const rndNum = lodash.random(0, foundOres.length - 1);
                 const selectedOre = foundOres[rndNum];
 
-                console.log("The winning ore is " + selectedOre.name);
+                // console.log("The winning ore is " + selectedOre.name);
                 inventory.addItem(ORES, selectedOre);
             }
 
-            wsio.emit('update-ores', true);
+            wsio.emit('update-inventory', true);
         }, this.#MINING_INTERVAL);
     }
 }

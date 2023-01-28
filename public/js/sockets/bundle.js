@@ -1,5 +1,47 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const { socket } = window;
+
+const progressBar = document.querySelector('.level-tracker-progress');
+const levelStage = document.querySelector('.level-stage');
+const levelCurrentXP = document.querySelector('.level-current-experience');
+const levelMinXP = document.querySelector('.level-min-experience');
+
+let currentStage = 1;
+let currentProgress = 0;
+
+socket.on('update-level-info', async ({ experience, minimumExperience, progress, stage }) => {
+    if(stage > currentStage) {
+        await moveProgressBarTransition(100);
+        progressBar.style.width = '0%';
+    }
+
+    levelStage.innerText = stage;
+    levelCurrentXP.innerText = experience;
+    levelMinXP.innerText = minimumExperience;
+
+    currentStage = stage;
+    setTimeout(async () => {
+        await moveProgressBarTransition(progress);
+    }, 100)
+
+});
+
+function moveProgressBarTransition(percentage) {
+    return new Promise(resolve => {
+        progressBar.classList.add('transition');
+        progressBar.style.width = percentage + '%';
+
+        progressBar.addEventListener('transitionend', () => {
+            progressBar.classList.remove('transition');
+            progressBar.removeEventListener('transitionend', this);
+            resolve(true);
+        })
+    })
+} 
+
+
+},{}],2:[function(require,module,exports){
+const { socket } = window;
 const inventoryList = document.querySelector('.inventory-list');
 
 function addListeners() {
@@ -19,7 +61,6 @@ function addListeners() {
         })
         .then(res => res.json())
         .then(response => {
-            console.log('Sell item', response);
         })
         
     }))
@@ -27,7 +68,7 @@ function addListeners() {
 
 addListeners();
 
-socket.on('update-ores', async (hasOres) => {
+socket.on('update-inventory', async (hasOres) => {
     // Receive partial
     if(!hasOres) {
         inventoryList.innerHTML = '';
@@ -46,7 +87,7 @@ socket.on('update-ores', async (hasOres) => {
 
 
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 const socket = io('http://localhost:8000');
 
 window.socket = socket;
@@ -60,5 +101,6 @@ socket.on('server-reload', (data) => {
 })
 
 require('./ores');
+require('./level-tracker');
 
-},{"./ores":1}]},{},[2]);
+},{"./level-tracker":1,"./ores":2}]},{},[3]);

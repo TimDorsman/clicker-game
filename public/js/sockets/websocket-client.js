@@ -11,3 +11,4 @@ socket.on('server-reload', (data) => {
 })
 
 require('./ores');
+require('./level-tracker');
