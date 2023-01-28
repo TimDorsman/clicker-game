@@ -1,5 +1,6 @@
-@import url("./partials/level-tracker.css");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+@import url("./partials/level-tracker.css");
 html {
   min-height: 100vh; }
 
@@ -88,7 +89,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    font-size: 24px; }
+    font-size: 24px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; }
+    .inventory-list-item {
+      color: #FFF;
+      text-shadow: 1px 1px 3px #000;
+      font-family: 'Michroma', sans-serif; }
   .inventory-sell {
     color: #fff;
     text-shadow: 1px 1px 3px #000;
@@ -100,3 +106,5 @@ body {
     cursor: pointer; }
     .inventory-sell:active {
       background: linear-gradient(#b60404, #ff0000); }
+  .inventory-selling-price {
+    color: gold; }

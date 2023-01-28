@@ -9,7 +9,7 @@ const { ORES } = require('../../../constants/ores');
 const inventory = new Inventory();
 
 class Mine {
-    #MINING_INTERVAL = 100;
+    #MINING_INTERVAL = 500;
 
     constructor() {
         this.name = 'Mine';

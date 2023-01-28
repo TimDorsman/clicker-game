@@ -1,7 +1,8 @@
 <ul class="inventory-list">
     <% for(const[type, ore] of Object.entries(inventory)) { %>
-        <li class="inventory-list-item"><%= ore.amount + "x " + ore.name + " " + ore.totalPrice %>
+        <li class="inventory-list-item">
             <button class="inventory-sell" data-type="ores" data-product="<%= ore.name %>">Sell</button>
+            <span class="inventory-amount"><%= ore.amount %>x</span> <span><%= ore.name %></span> (<span class="inventory-selling-price">C. <%= ore.totalPrice %></span>)
         </li>
     <% } %>
 </ul>

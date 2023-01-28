@@ -17,46 +17,8 @@ class LevelTracker {
         this.progress = 100 / this.minimumExperience * this.experience;
     }
 
-    addExperience(value) {
-        if(!Array.isArray(value)) {
-            this.handleExperience(value)
-            return;
-        }
-
-        const totalExperience = this.getGeneratedExperience(value);
-        this.handleExperience(totalExperience);
-    }
-
-    handleExperience(amount) {
-        this.experience += amount ?? this.defaultIncrementer;
-
-        while(this.experience >= this.minimumExperience) {
-            this.increaseLevel();
-            this.increaseIncrementer();
-            this.useSpareExperience();
-        }
-
-        wsio.emit('update-level-info', {
-            experience: this.experience,
-            minimumExperience: this.minimumExperience,
-            progress: 100 / this.minimumExperience * this.experience,
-            stage: this.stage,
-        });
-    }
-
     getProgress() {
         return this.progress;
-    }
-
-    getGeneratedExperience(items) {
-        if(Array.isArray(items)) {
-            const foundListItems = items.map(item => experienceList.find(listItem => listItem.name === item.name));
-
-            const totalExperience = foundListItems.reduce((currentValue, listItem) => { console.log("VALUE", listItem); return currentValue + lodash.random(listItem.minExperience, listItem.maxExperience)}, 0);
-            return totalExperience;
-        }
-
-        throw new Error('getGeneratedExperience expects type of array');
     }
 
     getStage() {
@@ -71,6 +33,45 @@ class LevelTracker {
         return this.minimumExperience;
     }
 
+    addExperience(value) {
+        if(!Array.isArray(value)) {
+            this.handleExperience(value)
+            return;
+        }
+
+        const totalExperience = this.getGeneratedExperience(value);
+        this.handleExperience(totalExperience);
+    }
+
+    handleExperience(amount) {
+        this.experience += amount ?? this.defaultIncrementer;
+
+        while(this.experience >= this.minimumExperience) {
+            console.log("Level up!");
+            this.useSpareExperience();
+            this.increaseIncrementer();
+            this.increaseLevel();
+        }
+
+        wsio.emit('update-level-info', {
+            experience: this.experience,
+            minimumExperience: this.minimumExperience,
+            progress: 100 / this.minimumExperience * this.experience,
+            stage: this.stage,
+        });
+    }
+
+    getGeneratedExperience(items) {
+        if(Array.isArray(items)) {
+            const foundListItems = items.map(item => experienceList.find(listItem => listItem.name === item.name));
+
+            const totalExperience = foundListItems.reduce((currentValue, listItem) => currentValue + lodash.random(listItem.minExperience, listItem.maxExperience), 0);
+            return totalExperience;
+        }
+
+        throw new Error('getGeneratedExperience expects type of array');
+    }
+
     increaseLevel() {
         this.stage++;
         this.minimumExperience += this.defaultIncrementer;
@@ -79,12 +80,11 @@ class LevelTracker {
     // When you level up, use the spare experience for the next level
     useSpareExperience() {
         const newStartingXP = this.experience - this.minimumExperience;
-        console.log("New Starting XP", newStartingXP);
-        this.experience = newStartingXP;
+        this.experience = newStartingXP > 0 ? newStartingXP : 0;
     }
 
     increaseIncrementer() {
-        this.defaultIncrementer += this.stage * this.defaultIncrementer;
+        this.defaultIncrementer += this.stage * 25;
     }
 }
 
