@@ -1,4 +1,4 @@
-const { buyAssetFunc } = require('../../modules/clicker');
+const { buyAssetFunc } = require('../../dist/clicker');
 
 const buyAsset = (app) => app.post('/game/asset/buy', (req, res) => {
     if(req.error) {

@@ -6,7 +6,7 @@ class Wallet {
 
         Wallet.instance = this;
 
-        this.total = 5;
+        this.total = 2500;
     }
 
     addCoins(amount) {

@@ -1,4 +1,4 @@
-const { getUserFunc, getUsersFunc } = require('../../modules/users');
+const { getUserFunc, getUsersFunc } = require('../../dist/users');
 
 const getUser = (app) => app.get('/user/single', (req, res) => {
 	if(req.error) {

@@ -1,6 +1,6 @@
 const { assetsList } = require('../data/assets.json');
 const { oreList } = require('../data/ores.json');
-const { build } = require('./assetsfactory');
+const { build } = require('./factories/assetsfactory');
 const Inventory = require('./inventory');
 const Wallet = require('./wallet');
 const { ASSETS } = require('../../constants/inventory');

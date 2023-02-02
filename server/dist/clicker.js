@@ -1,11 +1,12 @@
 
-const Wallet = require('../utils/wallet');
-const Inventory = require('../utils/inventory');
-const Shop = require('../utils/shop');
-const GameController = require('../utils/gamecontroller');
-const Merchant = require('../utils/merchant');
+const Wallet = require('../modules/wallet');
+const Inventory = require('../modules/inventory');
+const Shop = require('../modules/shop');
+const GameController = require('../modules/gamecontroller');
+const Merchant = require('../modules/merchant');
 
 new GameController();
+
 const wallet = new Wallet();
 const inventory = new Inventory();
 const shop = new Shop();

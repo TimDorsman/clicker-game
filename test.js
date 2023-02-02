@@ -1,4 +1,4 @@
-const Level = require("./server/utils/user/progress/level");
+const Level = require("./server/modules/user/progress/level");
 
 const level = new Level();
 

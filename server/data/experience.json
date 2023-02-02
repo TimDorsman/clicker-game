@@ -7,8 +7,8 @@
         },
         {
             "name": "diamonds",
-            "minExperience": 20,
-            "maxExperience": 25
+            "minExperience": 500,
+            "maxExperience": 2500
         },
         {
             "name": "emeralds",

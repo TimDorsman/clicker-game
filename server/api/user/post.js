@@ -1,4 +1,4 @@
-const { addUserFunc } = require('../../modules/users');
+const { addUserFunc } = require('../../dist/users');
 
 const addUser = (app) => app.post('/user/add', (req, res) => {
 	if(req.error) {

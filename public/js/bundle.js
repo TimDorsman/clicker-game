@@ -1,8 +1,20 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+// Sockets
 require('./sockets/websocket-client');
+require('./sockets/ores');
+require('./sockets/level-tracker');
+require('./sockets/boss-battle');
+
+// UI
 require('./modules/wallet');
 require('./modules/error-message');
-},{"./modules/error-message":2,"./modules/wallet":3,"./sockets/websocket-client":7}],2:[function(require,module,exports){
+},{"./modules/error-message":2,"./modules/wallet":3,"./sockets/boss-battle":4,"./sockets/level-tracker":5,"./sockets/ores":6,"./sockets/websocket-client":7}],2:[function(require,module,exports){
+const closeButton = document.querySelector('.error-message-close');
+const errorMessageContainer = document.querySelector('.error-message');
+
+closeButton.addEventListener('click', () => {
+    errorMessageContainer.classList.add('hidden');
+})
 
 },{}],3:[function(require,module,exports){
 const manualButton = document.querySelector('#manualButton');
@@ -118,11 +130,19 @@ socket.on('update-fight', (data) => {
 
     if(data.boss) {
         const bossHealth = document.querySelector('#bossHealth');
+        const damageTakenEl = document.createElement('span');
+
+        damageTakenEl.classList.add('boss-overlay-damage-taken');
+        damageTakenEl.innerText = `-${data.boss.health}`;
+        damageTakenEl.addEventListener('animationend', () => damageTakenEl.remove())
+        bossHealth.parentElement.prepend(damageTakenEl);
+
         bossHealth.innerText = data.boss.health;
         bossHealth.addEventListener('transitionend', () => {
             bossHealth.classList.remove('damaged');
             bossHealth.removeEventListener('transitionend', this)
         });
+
 
         bossHealth.classList.add('damaged');
     }
@@ -250,8 +270,4 @@ socket.on('server-reload', (data) => {
     }
 })
 
-require('./ores');
-require('./level-tracker');
-require('./boss-battle');
-
-},{"./boss-battle":4,"./level-tracker":5,"./ores":6}]},{},[1]);
+},{}]},{},[1]);

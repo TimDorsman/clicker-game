@@ -1,0 +1,24 @@
+<div class="boss-overlay">
+    <div class="boss-overlay-pulsers">
+        <% for(let i=0; i < 6; i++) { %>
+        <div class="boss-overlay-pulse"></div>
+        <% } %>
+    </div>
+    <div class="boss-overlay-content">
+        <h2 class="boss-overlay-announce">A boss has appeared!</h2>
+        <div class="boss-overlay-rarity-wrapper">
+            <h4 class="boss-overlay-rarity rare">Rare</h4>
+        </div>
+        <img src="images/bosses/dragon.png" class="boss-overlay-icon" />
+        <p class="boss-overlay-name">Dragon!</p>
+        <div class="boss-overlay-attributes">
+            <div class="boss-overlay-attribute"><span id="bossHealth">250</span> <img src="icons/heart.png" /></div>
+            <span class="divider">|</span>
+            <div class="boss-overlay-attribute"><span id="bossDamage">25</span> <img src="icons/swords.png" /></div>
+        </div>
+        <div class="boss-overlay-buttons">
+            <button class="boss-overlay-button" id="startFight">Fight! ⚔</button>
+            <button class="boss-overlay-button" id="cancelFight">Cancel ❌</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,256 @@
+:root {
+    --glow-color: #dd1add;
+    --full-brightness: 8;
+}
+
+.boss-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    overflow: hidden;
+    transition: opacity 0.8s;
+
+    &-icon {
+        position: relative;
+        left: 100%;
+        filter: brightness(var(--full-brightness));
+        animation: appearBoss 5s linear .5s forwards;
+        height: 120px;
+    }
+
+    &-pulsers {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        margin: auto;
+    }
+
+    &-pulse {
+        height: 10px;
+        width: 100%;
+        background: darkgray;
+        opacity: 0;
+        animation: pulse 3s ease-in-out infinite;
+
+        &:nth-child(odd) {
+            animation-delay: 1000ms;
+            width: 90%;
+            margin: auto;
+        }
+    }
+
+    &-content {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 40px 20px;
+        box-sizing: border-box;
+        font-family: "Bebas Neue", cursive;
+
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            transform: skew(15deg);
+            background: rgba(0, 0, 0, 0.85);
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+            border-radius: 20px;
+        }
+
+        > *:not(.boss-overlay-announce):not(.boss-overlay-icon):not(.boss-overlay-rarity-wrapper) {
+            opacity: 0;
+            animation: appearHUD .8s ease-out forwards 3.8s;
+        }
+    }
+
+    &-announce {
+        font-size: 32px;
+        color: #fff;
+        text-shadow: 3px 3px 10px #000;
+        margin: 0;
+    }
+
+    &-rarity-wrapper {
+        opacity: 0;
+        margin: 24px 0;
+        animation: glow 5s ease-out infinite alternate, appearHUD .8s ease-in forwards 3.2s;
+        border-radius: 5px;
+        padding: 8px 16px;
+        border: 1px solid var(--glow-color);
+    }
+
+    &-rarity {
+        font-size: 24px;
+        letter-spacing: 2px;
+        margin: 0;
+
+        &.rare {
+            color: #dd1add;
+        }
+
+        &.legendary {
+            color: #ffa500;
+        }
+    }
+
+    &-name,
+    &-attribute {
+        font-size: 24px;
+        color: #fff;
+    }
+
+    &-attributes {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+
+        .divider {
+            color: rgba(255, 255, 255, 0.596);
+        }
+    }
+
+    &-attribute {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+
+        img {
+            height: 32px;
+        }
+    }
+
+    #bossHealth {
+        transition: color .3s ease-out;
+
+        &.damaged {
+            color: #ad1515;
+        }
+    }
+
+    &-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    &-button {
+        margin-top: 20px;
+        border: royalblue 3px solid;
+        padding: 10px 20px;
+        background: rgba(167, 165, 165, 0.3);
+        font-family: "Bebas Neue", cursive;
+        letter-spacing: 2px;
+        font-size: 16px;
+        color: #fff;
+        transition: background 0.4s linear, border-color 0.4s linear;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(167, 165, 165, 0.4);
+            border-color: rgb(96, 133, 243);
+        }
+
+        &:active {
+            transition: none;
+            background: rgba(122, 121, 121, 1);
+            border-color: rgb(96, 133, 243);
+        }
+    }
+
+    &-damage-taken {
+        color: #f00;
+        text-shadow: 1px 1px #000;
+        position: absolute;
+        left: 0;
+        animation: takeDamage 2s cubic-bezier(0.11, 0.41, 0.63, 0.96) forwards;
+    }
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px var(--glow-color);
+    }
+    40%,
+    100% {
+        box-shadow: 0 0 20px var(--glow-color);
+    }
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes appearBoss {
+    0% {
+        left: 100%;
+        filter: brightness(var(--full-brightness));
+    }
+    30%{
+        left: 0;
+    }
+    60% {
+        filter: brightness(1);
+        left: 0;
+    }
+    100% {
+        filter: brightness(1);
+        left: 0;
+    }
+}
+
+@keyframes appearHUD {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        top: 0;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes takeDamage {
+    0% {
+        translate: 0;
+        opacity: 1;
+    }
+    10% {
+        translate: -10px -30px;
+    }
+    70% {
+        translate: -30px 50px;
+    }
+    80% {
+        translate: -30px 50px;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        translate: -30px 50px
+    }
+}

@@ -1,4 +1,4 @@
-const Wallet = require('../../utils/wallet');
+const Wallet = require('../../modules/wallet');
 const Mine = require('../structures/mine');
 const Asset = require('./asset');
 const wallet = new Wallet();

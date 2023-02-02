@@ -1,4 +1,4 @@
-const { sellProductFunc } = require('../../modules/clicker');
+const { sellProductFunc } = require('../../dist/clicker');
 
 const sellProduct = (app) => app.post('/merchant/product/sell', (req, res) => {
 	if(req.error) {

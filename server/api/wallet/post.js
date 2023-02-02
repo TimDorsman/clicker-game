@@ -1,4 +1,4 @@
-const { addCoinsToWalletFunc, getWalletTotalFunc } = require('../../modules/clicker');
+const { addCoinsToWalletFunc, getWalletTotalFunc } = require('../../dist/clicker');
 
 const addCoinsToWallet = (app) => app.post('/wallet/add', (req, res) => {
     try {

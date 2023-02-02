@@ -1,4 +1,4 @@
-const { getWalletTotalFunc } = require('../../modules/clicker');
+const { getWalletTotalFunc } = require('../../dist/clicker');
 
 const getWalletTotal = (app) => app.get('/wallet/total', (req, res) => {
     if (req.error) {

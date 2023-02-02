@@ -4,20 +4,22 @@
 <head>
 	<link rel="stylesheet" href="./css/clicker.css" />
 	<script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
-	<script src="/js/sockets/bundle.js" type="module"></script>
-	<script src="/js/clicker-game.js" defer></script>
+	<script src="/js/bundle.js" defer></script>
 </head>
 
 <body>
 	<main class="main">
 		<%- include('./partials/level-tracker'); %>
 		<%- include('./partials/inventory'); %>
+		<%- include('./partials/boss-battle'); %>
+		<%- include('./partials/error-message'); %>
+
 		<div class="main-container">
 			<div class="buttons-wrapper">
 				<div class="buttons-container button-container--secondary">
 					<% assetsList.forEach(function({name, price}) { %>
 						<div>
-							<button id="buyFarmer" data-name="<%= name %>" data-event="buyAsset" class="button secondary">Buy <%= name %> (<span>0</span>)</button>
+							<button id="<%= name %>Buy" data-name="<%= name %>" data-event="buyAsset" class="button secondary">Buy <%= name %> (<span>0</span>)</button>
 							<p class="asset-price"><%= price %></p>
 						</div>
 					<% }) %>

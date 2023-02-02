@@ -13,6 +13,12 @@
             "price": 5
         },
         {
+            "type": "human",
+            "name": "fighter",
+            "income": 2,
+            "price": 150
+        },
+        {
             "type": "building",
             "name": "factory",
             "income": 25,

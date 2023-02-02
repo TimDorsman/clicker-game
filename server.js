@@ -13,8 +13,8 @@ app.set('view engine', 'ejs');
 require('./server/routes')(app);
 const port = process.env.SERVER_PORT || 3000;
 
-const Inventory = require('./server/utils/inventory');
-const LevelTracker = require('./server/utils/user/progress/level-tracker');
+const Inventory = require('./server/modules/inventory');
+const LevelTracker = require('./server/modules/user/progress/level-tracker');
 
 const inventory = new Inventory();
 const levelTracker = new LevelTracker();

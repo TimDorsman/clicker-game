@@ -14,11 +14,11 @@ class LevelTracker {
         this.experience = 0;
         this.minimumExperience = 250;
         this.defaultIncrementer = 25;
-        this.progress = 100 / this.minimumExperience * this.experience;
     }
 
     getProgress() {
-        return this.progress;
+        const progress = 100 / this.minimumExperience * this.experience;
+        return progress;
     }
 
     getStage() {

@@ -36,8 +36,21 @@
     font-size: 32px; }
 
 .level-stage {
+  min-width: 60px;
+  text-align: center;
   font-size: 48px;
   color: orange; }
+  .level-stage.start-animation {
+    animation: fadeIntoNewStage 2s ease-out; }
 
 .level-experience {
   font-size: 24px; }
+
+@keyframes fadeIntoNewStage {
+  0% {
+    opacity: 1; }
+  40%,
+  60% {
+    opacity: 0; }
+  100% {
+    transform: rotateX(0); } }

@@ -13,6 +13,7 @@ socket.on('update-level-info', async ({ experience, minimumExperience, progress,
     if(stage > currentStage) {
         levelCurrentXP.innerText = currentMinimumExperience;
         await moveProgressBarTransition(100);
+        updateStageDisplay(stage);
         progressBar.style.width = '0%';
     }
 
@@ -20,7 +21,6 @@ socket.on('update-level-info', async ({ experience, minimumExperience, progress,
 
     levelCurrentXP.innerText = experience;
     levelMinXP.innerText = minimumExperience;
-    levelStage.innerText = stage;
 
     currentStage = stage;
     setTimeout(async () => {
@@ -39,5 +39,17 @@ function moveProgressBarTransition(percentage) {
             resolve(true);
         })
     })
-} 
+}
 
+function updateStageDisplay(stage) {
+    levelStage.classList.add('start-animation');
+
+    setTimeout(() => {
+        levelStage.innerText = stage;
+    }, 1000);
+
+    levelStage.addEventListener('animationend', () => {
+        levelStage.classList.remove('start-animation');
+        levelStage.removeEventListener('animationend', this);
+    })
+}

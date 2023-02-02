@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url("./partials/level-tracker.css");
+@import url("./partials/boss-battle.css");
+@import url("./partials/error-message.css");
 html {
   min-height: 100vh; }
 

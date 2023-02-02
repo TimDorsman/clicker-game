@@ -9,7 +9,7 @@
         {
             "type": "ore",
             "name": "diamonds",
-            "chance": 0.5,
+            "chance": 50,
             "price": 500
         },
         {

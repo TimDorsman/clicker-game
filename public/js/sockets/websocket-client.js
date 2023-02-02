@@ -9,6 +9,3 @@ socket.on('server-reload', (data) => {
         location.reload();
     }
 })
-
-require('./ores');
-require('./level-tracker');

@@ -1,4 +1,3 @@
-const { MINER } = require("../../constants/assets");
 const Inventory = require("./inventory");
 const Mine = require("./structures/mine");
 const Wallet = require("./wallet");
@@ -8,7 +7,7 @@ const wallet = new Wallet();
 const mine = new Mine();
 
 class GameController {
-	GENERATE_MONEY_INTERVAL;
+	#GENERATE_MONEY_INTERVAL = 1000;
 
 	constructor() {
 		if (GameController.instance) {
@@ -16,7 +15,6 @@ class GameController {
 		}
 
 		GameController.instance = this;
-		this.GENERATE_MONEY_INTERVAL = 1000;
 		this.startGeneratingMoney();
 		mine.startMining();
 	}
@@ -32,7 +30,7 @@ class GameController {
 			}
 
 			wallet.addCoins(totalGeneratedCoins);
-		}, this.GENERATE_MONEY_INTERVAL);
+		}, this.#GENERATE_MONEY_INTERVAL);
 	}
 };
 

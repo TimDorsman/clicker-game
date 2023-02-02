@@ -1,4 +1,4 @@
-const { getAssetsFunc } = require('../../modules/clicker');
+const { getAssetsFunc } = require('../../dist/clicker');
 
 const getAssets = (app) => app.get('/game/assets', (req, res) => {
     if(req.error) {

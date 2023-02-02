@@ -1,0 +1,10 @@
+{
+    "bossesList": [
+        {
+            "type": "mythical",
+            "name": "dragon",
+            "rarity": "rare",
+            "chance": 100
+        }
+    ]
+}

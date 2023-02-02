@@ -31,7 +31,25 @@ class Inventory {
         this[type].set(item.name, assets);
     }
 
+    updateItems(type, name, items) {
+        this.removeItems(type, name);
+
+        if(!Array.isArray(items)) {
+            this.addItem(type, items);
+            return;
+        }
+
+        items.forEach(item => {
+            this.addItem(type,item)
+        })
+    }
+
     removeItems(type, name, amount = 'all') {
+        if(this[type] === undefined) {
+            console.log(`Unable to remove '${type}' from inventory`);
+            return;
+        }
+
         // Remove all items from a category
         if(amount === 'all') {
             const removedItems = this[type].get(name);
@@ -48,7 +66,7 @@ class Inventory {
     }
 
     getItemByName(type, name) {
-        return this[type].get(name);
+        return this[type]?.get(name) ?? [];
     }
 
     formatByItem(item, sorting = MERGED) {
