@@ -1,4 +1,4 @@
-const { wsio } = require("../../websocket-server");
+const wsio = require("../utils/wsio")();
 const Inventory = require("./inventory");
 const LevelTracker = require("./user/progress/level-tracker");
 const Wallet = require("./wallet");

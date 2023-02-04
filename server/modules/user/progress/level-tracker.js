@@ -1,4 +1,4 @@
-const { wsio } = require('../../../../websocket-server');
+const wsio = require('../../../utils/wsio')();
 const { experienceList } = require('../../../data/experience.json');
 const lodash = require('lodash');
 

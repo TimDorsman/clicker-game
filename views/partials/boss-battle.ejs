@@ -9,12 +9,12 @@
         <div class="boss-overlay-rarity-wrapper">
             <h4 class="boss-overlay-rarity rare">Rare</h4>
         </div>
-        <img src="images/bosses/dragon.png" class="boss-overlay-icon" />
-        <p class="boss-overlay-name">Dragon!</p>
+        <img src="images/bosses/<%= boss.name.toLowerCase() %>.png" class="boss-overlay-icon" />
+        <p class="boss-overlay-name"><span id="bossName"><%= boss.name %></span>!</p>
         <div class="boss-overlay-attributes">
-            <div class="boss-overlay-attribute"><span id="bossHealth">250</span> <img src="icons/heart.png" /></div>
+            <div class="boss-overlay-attribute"><span id="bossHealth"><%= boss.health %></span> <img src="icons/heart.png" /></div>
             <span class="divider">|</span>
-            <div class="boss-overlay-attribute"><span id="bossDamage">25</span> <img src="icons/swords.png" /></div>
+            <div class="boss-overlay-attribute"><span id="bossDamage"><%= boss.damage %></span> <img src="icons/swords.png" /></div>
         </div>
         <div class="boss-overlay-buttons">
             <button class="boss-overlay-button" id="startFight">Fight! ⚔</button>

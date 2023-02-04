@@ -100,58 +100,77 @@ async function buyAsset(e) {
 },{}],4:[function(require,module,exports){
 const { socket } = window;
 
-const startFightButton = document.querySelector('#startFight');
-const cancelFightButton = document.querySelector('#cancelFight');
+socket.on('boss-encountered', async () => {
+	await fetch('/p/boss-battle')
+	.then(res => res.json())
+	.then(html => {
+		const mainContainer = document.querySelector('.main');
+		mainContainer.insertAdjacentHTML('afterbegin', html.data);
 
-startFightButton.addEventListener('click', () => {
-    socket.emit('update-fight', {
-        fight: true
-    });
-})
+		const startFightButton = document.querySelector('#startFight');
+		const cancelFightButton = document.querySelector('#cancelFight');
 
-cancelFightButton.addEventListener('click', () => {
-    const bossOverlay = document.querySelector('.boss-overlay');
-    bossOverlay.addEventListener('transitionend', () => {
-        setTimeout(() => {
-            bossOverlay.remove();            
-        }, 100);
-    })
-    bossOverlay.style.opacity = 0;
+		console.log("fightButtons", startFightButton, cancelFightButton)
 
-    socket.emit('update-fight', {
-        fight: false
-    })
+		startFightButton.addEventListener('click', () => {
+			console.log("Fight!");
+			socket.emit('update-fight', {
+				fight: true,
+			});
+		})
+
+		cancelFightButton.addEventListener('click', removeOverlay)
+	})
 })
 
 socket.on('update-fight', (data) => {
-    if(data.error) {
-        window.alert(data.error)
-    }
+	if(data.error) {
+		window.alert(data.error)
+	}
 
-    if(data.boss) {
-        const bossHealth = document.querySelector('#bossHealth');
-        const damageTakenEl = document.createElement('span');
+	console.log("Data", data);
+	if(data.boss) {
+		const bossHealth = document.querySelector('#bossHealth');
+		const damageTakenEl = document.createElement('span');
 
-        damageTakenEl.classList.add('boss-overlay-damage-taken');
-        damageTakenEl.innerText = `-${data.boss.health}`;
-        damageTakenEl.addEventListener('animationend', () => damageTakenEl.remove())
-        bossHealth.parentElement.prepend(damageTakenEl);
+		damageTakenEl.classList.add('boss-overlay-damage-taken');
+		damageTakenEl.innerText = `-${data.boss.damageTaken}`;
+		damageTakenEl.addEventListener('animationend', () => damageTakenEl.remove())
+		bossHealth.parentElement.prepend(damageTakenEl);
 
-        bossHealth.innerText = data.boss.health;
-        bossHealth.addEventListener('transitionend', () => {
-            bossHealth.classList.remove('damaged');
-            bossHealth.removeEventListener('transitionend', this)
-        });
+		bossHealth.innerText = data.boss.health;
+		bossHealth.addEventListener('transitionend', () => {
+			bossHealth.classList.remove('damaged');
+			bossHealth.removeEventListener('transitionend', this)
 
+			if(data.boss.health <= 0) {
+				// alert(`You've defeated the ${data.boss.name}`)
+				removeOverlay();
+				return;
+			}
+		});
 
-        bossHealth.classList.add('damaged');
-    }
+		bossHealth.classList.add('damaged');
+	}
 
-    if(data.fighters) {
-        const fightersButtonAmount = document.querySelector('#fighterBuy span');
-        fightersButtonAmount.innerText = data.fighters.length;
-    }
+	if(data.fighters) {
+		const fightersButtonAmount = document.querySelector('#fighterBuy span');
+		fightersButtonAmount.innerText = data.fighters.length;
+	}
 });
+
+function removeOverlay() {
+	const bossOverlay = document.querySelector('.boss-overlay');
+	bossOverlay.addEventListener('transitionend', () => {
+		setTimeout(() => {
+			bossOverlay.remove();      
+			socket.emit('update-fight', {
+				fight: false
+			})      
+		}, 100);
+	})
+	bossOverlay.style.opacity = 0;
+}
 
 },{}],5:[function(require,module,exports){
 const { socket } = window;

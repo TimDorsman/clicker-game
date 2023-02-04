@@ -1,11 +1,13 @@
-const { DRAGON } = require("../../../constants/bosses");
-const Dragon = require("../bosses/dragon");
+const { DRAGON, VAMPIRE } = require("../../../constants/bosses");
+const Bosses = require('../bosses');
 
 class BossesFactory { 
     static build(boss) {
         switch(boss) {
             case DRAGON:
-                return new Dragon();
+                return new Bosses.Dragon();
+            case VAMPIRE:
+                return new Bosses.Vampire();
             default:
                 return `Unable to get boss '${boss}'`;
         }

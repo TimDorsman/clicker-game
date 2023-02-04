@@ -5,6 +5,12 @@
             "name": "dragon",
             "rarity": "rare",
             "chance": 100
+        },
+        {
+            "type": "immortal",
+            "name": "vampire",
+            "rarity": "rare",
+            "chance": 100
         }
     ]
 }

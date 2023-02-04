@@ -9,7 +9,10 @@
   transform: translate(-50%, -50%);
   width: 100%;
   overflow: hidden;
-  transition: opacity 0.8s; }
+  opacity: 1;
+  transition: opacity 0.8s;
+  z-index: 1000;
+  animation: fadeIn .8s ease-out forwards; }
   .boss-overlay-icon {
     position: relative;
     left: 100%;
@@ -128,6 +131,12 @@
     position: absolute;
     left: 0;
     animation: takeDamage 2s cubic-bezier(0.11, 0.41, 0.63, 0.96) forwards; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
 @keyframes glow {
   0% {

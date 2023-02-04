@@ -1,5 +1,5 @@
 const lodash = require('lodash');
-const { wsio } = require('../../../websocket-server');
+const wsio = require('../../utils/wsio')();
 const { MINER } = require('../../../constants/assets');
 const { oreList }  = require('../../data/ores.json');
 const { ASSETS } = require('../../../constants/inventory');
